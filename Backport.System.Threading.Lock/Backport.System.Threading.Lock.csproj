@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net9.0</TargetFrameworks>
+		<LangVersion>12.0</LangVersion>
+		<Authors>Mark Cilia Vincenti</Authors>
+		<RepositoryUrl>https://github.com/MarkCiliaVincenti/AsyncKeyedLock.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/AsyncKeyedLock</PackageProjectUrl>
+		<Copyright>MIT</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Version>1.0.0</Version>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior versions (from .NET Standard 2.0 up to .NET 8.0), providing as much similar functionality as possible.</Description>
+		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
+		<PackageTags>System.Threading.Lock,backport</PackageTags>
+		<RepositoryType>git</RepositoryType>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<IsPackable>true</IsPackable>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+		<EnableNETAnalyzers>True</EnableNETAnalyzers>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>Backport.System.Threading.Lock.snk</AssemblyOriginatorKeyFile>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
+		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Optimize>true</Optimize>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\logo.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\CONTRIBUTORS.md">
+			<Pack>False</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.4" PrivateAssets="All" />
+	</ItemGroup>
+</Project>
