@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace System.Threading;
 
 /// <summary>
-/// A backport of 'System.Threading.Lock'.
+/// A backport of .NET 9.0+'s System.Threading.Lock.
 /// </summary>
 public sealed class Lock
 {
