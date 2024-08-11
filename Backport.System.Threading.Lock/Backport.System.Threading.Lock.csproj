@@ -4,11 +4,11 @@
 		<TargetFrameworks>netstandard2.0;net9.0</TargetFrameworks>
 		<LangVersion>12.0</LangVersion>
 		<Authors>Mark Cilia Vincenti</Authors>
-		<RepositoryUrl>https://github.com/MarkCiliaVincenti/AsyncKeyedLock.git</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/AsyncKeyedLock</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<PackageIcon>logo.png</PackageIcon>
 		<PackageReleaseNotes>Initial release.</PackageReleaseNotes>
 		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior versions (from .NET Standard 2.0 up to .NET 8.0), providing as much similar functionality as possible.</Description>
@@ -16,8 +16,8 @@
 		<PackageTags>System.Threading.Lock,backport</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>1.0.0.0</FileVersion>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+		<FileVersion>1.0.1.0</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
