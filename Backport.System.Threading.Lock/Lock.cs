@@ -1,8 +1,8 @@
-﻿#if !NET9_0_OR_GREATER
-using System.Runtime.CompilerServices;
-
+﻿using System.Runtime.CompilerServices;
+#if NET9_0_OR_GREATER
+[assembly: TypeForwardedTo(typeof(System.Threading.Lock))]
+#else
 namespace System.Threading;
-
 /// <summary>
 /// A backport of .NET 9.0+'s System.Threading.Lock.
 /// </summary>
