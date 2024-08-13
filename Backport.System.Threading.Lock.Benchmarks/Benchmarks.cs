@@ -28,7 +28,9 @@ namespace Benchmarks
             {
                 object myLock = new();
                 lock (myLock)
-                { }
+                {
+                    // do nothing
+                }
             }
         }
 
@@ -39,7 +41,9 @@ namespace Benchmarks
             {
                 Lock myLock = new();
                 lock (myLock)
-                { }
+                {
+                    // do nothing
+                }
             }
         }
 
