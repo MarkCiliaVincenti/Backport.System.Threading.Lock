@@ -1,0 +1,7 @@
+<Project>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net35' or '$(TargetFramework)' == 'net40' or '$(TargetFramework)' == 'net403'">
+    <DefineConstants>PARTIAL_SUPPORT</DefineConstants>
+  </PropertyGroup>
+
+</Project>

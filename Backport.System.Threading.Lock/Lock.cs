@@ -13,7 +13,7 @@ public sealed class Lock
 /// <inheritdoc cref="Monitor.Enter(object)"/>
 /// </summary>
 /// <exception cref="ArgumentNullException"/>
-#if NET45_OR_GREATER
+#if !PARTIAL_SUPPORT
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public void Enter() => Monitor.Enter(this);
@@ -25,7 +25,7 @@ public sealed class Lock
     /// <inheritdoc cref="Monitor.TryEnter(object)"/>
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
-#if NET45_OR_GREATER
+#if !PARTIAL_SUPPORT
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public bool TryEnter() => Monitor.TryEnter(this);
@@ -38,7 +38,7 @@ public sealed class Lock
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="ArgumentOutOfRangeException"/>
-#if NET45_OR_GREATER
+#if !PARTIAL_SUPPORT
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public bool TryEnter(TimeSpan timeout) => Monitor.TryEnter(this, timeout);
@@ -51,7 +51,7 @@ public sealed class Lock
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="ArgumentOutOfRangeException"/>
-#if NET45_OR_GREATER
+#if !PARTIAL_SUPPORT
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public bool TryEnter(int millisecondsTimeout) => Monitor.TryEnter(this, millisecondsTimeout);
@@ -61,22 +61,22 @@ public sealed class Lock
     /// </summary>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="SynchronizationLockException"/>
-#if NET45_OR_GREATER
+#if !PARTIAL_SUPPORT
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public void Exit() => Monitor.Exit(this);
 
     /// <summary>
-    /// <inheritdoc cref="Monitor.IsEntered(object)"/>
+    /// Determines whether the current thread holds this lock.
     /// </summary>
     /// <returns>
-    /// <inheritdoc cref="Monitor.IsEntered(object)"/>
+    /// true if the current thread holds this lock; otherwise, false.
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
-#if NET35
-    public bool IsHeldByCurrentThread => throw new NotSupportedException("IsHeldByCurrentThread is only supported on .NET Framework 4.5 or greater.");
-#else
+#if !PARTIAL_SUPPORT
     public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
+#else
+    public bool IsHeldByCurrentThread => throw new NotSupportedException("IsHeldByCurrentThread is only supported on .NET Framework 4.5 or greater.");
 #endif
 #pragma warning restore CS9216 // A value of type 'System.Threading.Lock' converted to a different type will use likely unintended monitor-based locking in 'lock' statement.
 
@@ -95,7 +95,7 @@ public sealed class Lock
     /// disposing the returned <see cref="Scope"/>, as many times as it had entered the lock to fully exit the lock and
     /// allow other threads to enter the lock.
     /// </remarks>
-#if NET45_OR_GREATER
+#if !PARTIAL_SUPPORT
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public Scope EnterScope()
@@ -113,7 +113,7 @@ public sealed class Lock
         /// Exits the lock.
         /// </summary>
         /// <exception cref="SynchronizationLockException"/>
-#if NET45_OR_GREATER
+#if !PARTIAL_SUPPORT
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public readonly void Dispose() => @lock.Exit();
