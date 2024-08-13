@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backport.System.Threading.Lock", "Backport.System.Threading.Lock\Backport.System.Threading.Lock.csproj", "{206E4B68-1ED0-4BD9-853F-63C7E03F1B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backport.System.Threading.Lock", "Backport.System.Threading.Lock\Backport.System.Threading.Lock.csproj", "{206E4B68-1ED0-4BD9-853F-63C7E03F1B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backport.System.Threading.Lock.Tests", "Backport.System.Threading.Lock.Tests\Backport.System.Threading.Lock.Tests.csproj", "{D651FDC4-C521-4759-909E-AC36E4137BBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backport.System.Threading.Lock.Tests", "Backport.System.Threading.Lock.Tests\Backport.System.Threading.Lock.Tests.csproj", "{D651FDC4-C521-4759-909E-AC36E4137BBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backport.System.Threading.Lock.Benchmarks", "Backport.System.Threading.Lock.Benchmarks\Backport.System.Threading.Lock.Benchmarks.csproj", "{A6E6F8C0-C4BB-4865-8E74-B9F515FC8773}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D651FDC4-C521-4759-909E-AC36E4137BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D651FDC4-C521-4759-909E-AC36E4137BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D651FDC4-C521-4759-909E-AC36E4137BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6E6F8C0-C4BB-4865-8E74-B9F515FC8773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6E6F8C0-C4BB-4865-8E74-B9F515FC8773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6E6F8C0-C4BB-4865-8E74-B9F515FC8773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6E6F8C0-C4BB-4865-8E74-B9F515FC8773}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

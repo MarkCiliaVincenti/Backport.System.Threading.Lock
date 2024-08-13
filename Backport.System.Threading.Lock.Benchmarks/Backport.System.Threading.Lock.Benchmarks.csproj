@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<LangVersion>preview</LangVersion>
+		<OutputType>Exe</OutputType>
+		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Backport.System.Threading.Lock\Backport.System.Threading.Lock.csproj" />
+	</ItemGroup>
+
+</Project>

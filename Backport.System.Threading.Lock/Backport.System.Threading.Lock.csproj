@@ -1,23 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>net35;net45;netstandard2.0;net9.0</TargetFrameworks>
 		<LangVersion>12.0</LangVersion>
 		<Authors>Mark Cilia Vincenti</Authors>
 		<RepositoryUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Add type forwarding to System.Threading.Lock for .NET 9.0 or greater.</PackageReleaseNotes>
+		<PackageReleaseNotes>Added benchmarks and support for .NET Framework 3.5 and 4.5.</PackageReleaseNotes>
 		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior versions (from .NET Standard 2.0 up to .NET 8.0), providing as much similar functionality as possible.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
 		<PackageTags>System.Threading.Lock,backport</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.2.0</AssemblyVersion>
-		<FileVersion>1.0.2.0</FileVersion>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
+		<FileVersion>1.0.3.0</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>

@@ -14,7 +14,7 @@ Example:
 ```
 
 ## Performance
-This library was benchmarked against locking on an object on .NET 8.0 and no speed or memory allocation difference was noted.
+This library was [benchmarked](https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock/Backport.System.Threading.Lock.Benchmarks) against locking on an object on .NET 8.0 and no speed or memory allocation difference was noted, whereas when .NET 9.0 was used the performance was ~25% better as opposed to locking on an object.
 
 ## Credits
 Check out our [list of contributors](https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock/blob/master/CONTRIBUTORS.md)!
