@@ -73,10 +73,10 @@ public sealed class Lock
     /// <inheritdoc cref="Monitor.IsEntered(object)"/>
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
-#if NET45_OR_GREATER
-    public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
-#else
+#if NET35
     public bool IsHeldByCurrentThread => throw new NotSupportedException("IsHeldByCurrentThread is only supported on .NET Framework 4.5 or greater.");
+#else
+    public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
 #endif
 #pragma warning restore CS9216 // A value of type 'System.Threading.Lock' converted to a different type will use likely unintended monitor-based locking in 'lock' statement.
 
