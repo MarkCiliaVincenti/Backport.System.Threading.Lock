@@ -8,7 +8,7 @@
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<PackageIcon>logo.png</PackageIcon>
 		<PackageReleaseNotes>Added benchmarks and support for .NET Framework 3.5 and 4.5.</PackageReleaseNotes>
 		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior versions (from .NET Standard 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
@@ -16,8 +16,8 @@
 		<PackageTags>System.Threading.Lock,backport,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.3.0</AssemblyVersion>
-		<FileVersion>1.0.3.0</FileVersion>
+		<AssemblyVersion>1.0.4.0</AssemblyVersion>
+		<FileVersion>1.0.4.0</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
