@@ -35,7 +35,7 @@
 	<PropertyGroup Condition="$(DefineConstants.Contains(TRIMMING_COMPATIBLE))">
 	  <PublishTrimmed>true</PublishTrimmed>
 	  <TrimmerDefaultAction>link</TrimmerDefaultAction>
-	</PropertyGroup>		
+	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>

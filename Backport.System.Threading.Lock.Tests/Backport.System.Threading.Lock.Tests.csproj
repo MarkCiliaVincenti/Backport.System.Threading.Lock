@@ -22,7 +22,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-	<TrimmerRootAssembly Include="Backport.System.Threading.Lock" />
   </ItemGroup>
 
   <ItemGroup>
