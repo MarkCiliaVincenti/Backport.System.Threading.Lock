@@ -7,16 +7,16 @@
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.1.5</Version>
+		<Version>1.1.6</Version>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Cleaning, improved documentation and enabled AOT and trimming.</PackageReleaseNotes>
+		<PackageReleaseNotes>Deterministic build.</PackageReleaseNotes>
 		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
 		<PackageTags>System.Threading.Lock,lock,backport,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>1.1.5.0</AssemblyVersion>
-		<FileVersion>1.1.5.0</FileVersion>
+		<AssemblyVersion>1.1.6.0</AssemblyVersion>
+		<FileVersion>1.1.6.0</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -24,6 +24,7 @@
 		<AnalysisLevel>latest</AnalysisLevel>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>Backport.System.Threading.Lock.snk</AssemblyOriginatorKeyFile>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(DefineConstants.Contains(AOT_COMPATIBLE))">
