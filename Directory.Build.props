@@ -10,6 +10,9 @@
     <DefineConstants>PRE_NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
-	<DefineConstants>AOT_AND_TRIMMING_COMPATIBLE</DefineConstants>
+	<DefineConstants>TRIMMING_COMPATIBLE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
+	<DefineConstants>AOT_COMPATIBLE</DefineConstants>
   </PropertyGroup>
 </Project>
