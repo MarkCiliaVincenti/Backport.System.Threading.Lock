@@ -1,6 +1,7 @@
 using FluentAssertions;
 
 namespace Tests;
+
 public class LockTests
 {
     [Fact]

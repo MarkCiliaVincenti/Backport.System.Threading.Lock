@@ -6,16 +6,22 @@ using System.Security;
 #else
 namespace System.Threading;
 /// <summary>
-/// A backport of .NET 9.0+'s System.Threading.Lock.
+/// A backport of .NET 9.0+'s System.Threading.Lock. Provides a way to get mutual exclusion in regions of code between different threads.
+/// A lock may be held by one thread at a time.
 /// </summary>
+/// <remarks>
+/// Threads that cannot immediately enter the lock may wait for the lock to be exited or until a specified timeout. A thread
+/// that holds a lock may enter the lock repeatedly without exiting it, such as recursively, in which case the thread should
+/// eventually exit the lock the same number of times to fully exit the lock and allow other threads to enter the lock.
+/// </remarks>
 public sealed class Lock
 {
 #pragma warning disable CS9216 // A value of type 'System.Threading.Lock' converted to a different type will use likely unintended monitor-based locking in 'lock' statement.
-/// <summary>
-/// <inheritdoc cref="Monitor.Enter(object)"/>
-/// </summary>
-/// <exception cref="ArgumentNullException"/>
-#if !PARTIAL_SUPPORT
+    /// <summary>
+    /// <inheritdoc cref="Monitor.Enter(object)"/>
+    /// </summary>
+    /// <exception cref="ArgumentNullException"/>
+#if !PRE_NETSTANDARD
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public void Enter() => Monitor.Enter(this);
@@ -27,7 +33,7 @@ public sealed class Lock
     /// <inheritdoc cref="Monitor.TryEnter(object)"/>
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
-#if !PARTIAL_SUPPORT
+#if !PRE_NETSTANDARD
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public bool TryEnter() => Monitor.TryEnter(this);
@@ -40,7 +46,7 @@ public sealed class Lock
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="ArgumentOutOfRangeException"/>
-#if !PARTIAL_SUPPORT
+#if !PRE_NETSTANDARD
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public bool TryEnter(TimeSpan timeout) => Monitor.TryEnter(this, timeout);
@@ -53,7 +59,7 @@ public sealed class Lock
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="ArgumentOutOfRangeException"/>
-#if !PARTIAL_SUPPORT
+#if !PRE_NETSTANDARD
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public bool TryEnter(int millisecondsTimeout) => Monitor.TryEnter(this, millisecondsTimeout);
@@ -63,7 +69,7 @@ public sealed class Lock
     /// </summary>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="SynchronizationLockException"/>
-#if !PARTIAL_SUPPORT
+#if !PRE_NETSTANDARD
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public void Exit() => Monitor.Exit(this);
@@ -75,7 +81,7 @@ public sealed class Lock
     /// true if the current thread holds this lock; otherwise, false.
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
-#if !PARTIAL_SUPPORT
+#if !PRE_NETSTANDARD
     public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
 #else
     public bool IsHeldByCurrentThread => throw new NotSupportedException("IsHeldByCurrentThread is only supported on .NET Framework 4.5 or greater.");
@@ -85,8 +91,7 @@ public sealed class Lock
     /// <summary>
     /// Enters the lock and returns a <see cref="Scope"/> that may be disposed to exit the lock. Once the method returns,
     /// the calling thread would be the only thread that holds the lock. This method is intended to be used along with a
-    /// language construct that would automatically dispose the <see cref="Scope"/>, such as with the C# <code>using</code>
-    /// statement.
+    /// language construct that would automatically dispose the <see cref="Scope"/>, such as with the C# using statement.
     /// </summary>
     /// <returns>
     /// A <see cref="Scope"/> that may be disposed to exit the lock.
@@ -97,7 +102,7 @@ public sealed class Lock
     /// disposing the returned <see cref="Scope"/>, as many times as it had entered the lock to fully exit the lock and
     /// allow other threads to enter the lock.
     /// </remarks>
-#if !PARTIAL_SUPPORT
+#if !PRE_NETSTANDARD
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public Scope EnterScope()
@@ -114,8 +119,14 @@ public sealed class Lock
         /// <summary>
         /// Exits the lock.
         /// </summary>
-        /// <exception cref="SynchronizationLockException"/>
-#if !PARTIAL_SUPPORT
+        /// <remarks>
+        /// If the calling thread holds the lock multiple times, such as recursively, the lock is exited only once. The
+        /// calling thread should ensure that each enter is matched with an exit.
+        /// </remarks>
+        /// <exception cref="SynchronizationLockException">
+        /// The calling thread does not hold the lock.
+        /// </exception>
+#if !PRE_NETSTANDARD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public readonly void Dispose() => @lock.Exit();

@@ -1,7 +1,15 @@
 <Project>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net35' or '$(TargetFramework)' == 'net40' or '$(TargetFramework)' == 'net403'">
-    <DefineConstants>PARTIAL_SUPPORT</DefineConstants>
+  <PropertyGroup>
+	  <LangVersion>preview</LangVersion>
+	  <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+	  <CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
+	  <CheckEolTargetFramework>false</CheckEolTargetFramework>
+	  <NoWarn>IDE0130</NoWarn>
   </PropertyGroup>
-
+  <PropertyGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net45'))">
+    <DefineConstants>PRE_NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
+	<DefineConstants>AOT_AND_TRIMMING_COMPATIBLE</DefineConstants>
+  </PropertyGroup>
 </Project>

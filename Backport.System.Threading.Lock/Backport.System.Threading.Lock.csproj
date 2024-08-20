@@ -2,22 +2,21 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net35;net45;netstandard2.0;net9.0</TargetFrameworks>
-		<LangVersion>12.0</LangVersion>
 		<Authors>Mark Cilia Vincenti</Authors>
 		<RepositoryUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.1.1</Version>
+		<Version>1.1.2</Version>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Made SecurityTransparent.</PackageReleaseNotes>
-		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior versions (from .NET Standard 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
+		<PackageReleaseNotes>Cleaning, improved documentation and enabled AOT and trimming.</PackageReleaseNotes>
+		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
-		<PackageTags>System.Threading.Lock,backport,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
+		<PackageTags>System.Threading.Lock,lock,backport,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>1.1.1.0</AssemblyVersion>
-		<FileVersion>1.1.1.0</FileVersion>
+		<AssemblyVersion>1.1.2.0</AssemblyVersion>
+		<FileVersion>1.1.2.0</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -25,8 +24,12 @@
 		<AnalysisLevel>latest</AnalysisLevel>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>Backport.System.Threading.Lock.snk</AssemblyOriginatorKeyFile>
-		<CheckEolTargetFramework>false</CheckEolTargetFramework>
-		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(DefineConstants.Contains(AOT_AND_TRIMMING_COMPATIBLE))">
+	  <IsAotCompatible>true</IsAotCompatible>
+	  <PublishAot>true</PublishAot>
+	  <PublishTrimmed>true</PublishTrimmed>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -50,6 +53,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.4" PrivateAssets="All" />
+		<PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="All" />
 	</ItemGroup>
 </Project>
