@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net35;net45;netstandard2.0;net6.0;net7.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>net35;net40;net45;netstandard2.0;net5.0;net6.0;net7.0;net9.0</TargetFrameworks>
 		<Authors>Mark Cilia Vincenti</Authors>
 		<RepositoryUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.1.6</Version>
+		<Version>2.0.0</Version>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Deterministic build.</PackageReleaseNotes>
+		<PackageReleaseNotes>Breaking change that requires different usage for projects targeting frameworks prior to .NET 5.0 in order to cater for potential thread aborts.</PackageReleaseNotes>
 		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
 		<PackageTags>System.Threading.Lock,lock,backport,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>1.1.6.0</AssemblyVersion>
-		<FileVersion>1.1.6.0</FileVersion>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -41,6 +41,12 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Optimize>true</Optimize>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Properties\PublishProfiles\**" />
+	  <EmbeddedResource Remove="Properties\PublishProfiles\**" />
+	  <None Remove="Properties\PublishProfiles\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\README.md">
