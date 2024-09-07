@@ -59,7 +59,7 @@ There is also no need to reference this library as a dependency for .NET 9.0+. Y
 
 ```
 <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
-  <PackageReference Include="Backport.System.Threading.Lock" Version="2.0.0" />  
+  <PackageReference Include="Backport.System.Threading.Lock" Version="2.0.1" />  
 </ItemGroup>
 ```
 
