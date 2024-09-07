@@ -43,6 +43,8 @@ public void Bar()
 }
 ```
 
+Use the `Lock` class the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0).
+
 ## Usage (only if targeting .NET 5.0 or later)
 Use this library the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0).
 
