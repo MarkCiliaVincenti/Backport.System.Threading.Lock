@@ -1,6 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
+
 #if NET5_0_OR_GREATER && !NET9_0_OR_GREATER
 namespace System.Threading;
+
 /// <summary>
 /// A backport of .NET 9.0+'s System.Threading.Lock. Provides a way to get mutual exclusion in regions of code between different threads.
 /// A lock may be held by one thread at a time.
