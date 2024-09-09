@@ -2,9 +2,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
-#if NET9_0_OR_GREATER
-[assembly: TypeForwardedTo(typeof(System.Threading.Lock))]
-#endif
 namespace Backport.System.Threading;
 /// <summary>
 /// A backport of .NET 9.0+'s System.Threading.Lock. Provides a way to get mutual exclusion in regions of code between different threads.
