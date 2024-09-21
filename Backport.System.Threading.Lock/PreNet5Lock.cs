@@ -1,6 +1,8 @@
 ﻿#if !NET9_0_OR_GREATER
 using System;
+#if !PRE_NETSTANDARD
 using System.Runtime.CompilerServices;
+#endif
 using System.Threading;
 
 namespace Backport.System.Threading;

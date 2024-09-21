@@ -1,4 +1,5 @@
-﻿using FrameworkNamespace = System.Threading;
+﻿using System.Runtime.CompilerServices;
+using FrameworkNamespace = System.Threading;
 
 namespace Backport.System.Threading;
 
@@ -14,6 +15,7 @@ public static class LockFactory
     /// If your project does not target anything before .NET 5.0, you do not need to use this; simply use <see cref="FrameworkNamespace.Lock"/>.
     /// </summary>
     /// <returns>An instance of <see cref="FrameworkNamespace.Lock"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static FrameworkNamespace.Lock Create() => new();
 }
 #else
@@ -28,6 +30,9 @@ public static class LockFactory
     /// If your project does not target anything before .NET 5.0, you do not need to use this; simply use System.Threading.Lock.
     /// </summary>
     /// <returns>An instance of <see cref="Lock"/>.</returns>
+#if !PRE_NETSTANDARD
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
     public static Lock Create() => new();
 }
 #endif
