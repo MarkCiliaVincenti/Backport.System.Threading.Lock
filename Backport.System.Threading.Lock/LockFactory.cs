@@ -1,5 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+﻿#if !PRE_NETSTANDARD
+using System.Runtime.CompilerServices;
+#endif
+#if NET9_0_OR_GREATER
 using FrameworkNamespace = System.Threading;
+#endif
 
 namespace Backport.System.Threading;
 

@@ -3,10 +3,75 @@
 
 A micro-library that backports .NET 9.0+'s `System.Threading.Lock` to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.
 
-## Usage (only if targeting frameworks prior to .NET 5.0)
+## Why is this useful?
+Apart from streamlining locking, especially with a new [lock statement pattern](https://github.com/dotnet/csharplang/issues/7104) being proposed, and the ability to use the [`using` pattern for locking](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock.enterscope?view=net-9.0#system-threading-lock-enterscope), the more obvious reason for using it is that it gives greater performance than simply locking on an object.
+
+## Why not keep it simple?
+Some developers have opted to put in code like this:
+```csharp
+#if NET9_0_OR_GREATER
+global using Lock = System.Threading.Lock;
+#else
+global using Lock = System.Object;
+#endif
+```
+
+This is a trick that works in some cases but limits you in what you want to do. You will be unable to use any of the methods offered by `System.Threading.Lock` such as `EnterScope` that allows you to use the using pattern.
+
+More importantly though, if you need to do something like lock in one method and lock with a timeout in another, you simply can't with this code you put here.
+
+On .NET 8.0 or earlier you cannot do a `myLock.Enter(5)` and on .NET 9.0 or later you wouldn't be able to `Monitor.Enter(myLock, 5)` as this gives you the warning "CS9216: A value of type System.Threading.Lock converted to a different type will use likely unintended monitor-based locking in lock statement."
+
+```csharp
+#if NET9_0_OR_GREATER
+global using Lock = System.Threading.Lock;
+#else
+global using Lock = System.Object;
+#endif
+
+private readonly Lock myObj = new();
+
+void DoThis()
+{
+   lock (myObj)
+   {
+      // do something
+   }
+}
+
+void DoThat()
+{
+   myObj.Enter(5); // this will not compile on .NET 8.0
+   Monitor.Enter(myObj, 5); // this will immediately enter the lock on .NET 9.0 even if another thread is locking on DoThis()
+   // do something else
+}
+```
+
+If you want to avoid limiting what you are able to do, you need a solution such as this library.
+
+## Usage
+### If only targeting .NET 5.0 or later
+Use this library the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0).
+
+In order to get the performance benefits of `System.Threading.Lock`, you must however [multi-target frameworks](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) in your `.csproj` file.
+
+Example:
+```
+<TargetFrameworks>net5.0;net9.0</TargetFrameworks>
+```
+
+There is also no need to reference this library as a dependency for .NET 9.0+. You can achieve that by having this in your `.csproj` file:
+
+```
+<ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
+  <PackageReference Include="Backport.System.Threading.Lock" Version="2.0.3" />  
+</ItemGroup>
+```
+
+### If targeting frameworks prior to .NET 5.0
 Due to frameworks prior to .NET 5.0 supporting the notorious `Thread.Abort`, we cannot use the same `System.Threading.Lock` namespace or else the locks would not be hardened against thread aborts, so we need to use a creator method instead.
 
-Remember to [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well in order to get the performance benefits of `System.Threading.Lock`.
+You must also [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well.
 
 Example:
 ```
@@ -44,24 +109,6 @@ public void Bar()
 ```
 
 Use the `Lock` class the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0).
-
-## Usage (only if targeting .NET 5.0 or later)
-Use this library the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0).
-
-In order to get the performance benefits of `System.Threading.Lock`, you must however [multi-target frameworks](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) in your `.csproj` file.
-
-Example:
-```
-<TargetFrameworks>net5.0;net9.0</TargetFrameworks>
-```
-
-There is also no need to reference this library as a dependency for .NET 9.0+. You can achieve that by having this in your `.csproj` file:
-
-```
-<ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
-  <PackageReference Include="Backport.System.Threading.Lock" Version="2.0.2" />  
-</ItemGroup>
-```
 
 ## Performance
 This library was [benchmarked](https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock/tree/master/Backport.System.Threading.Lock.Benchmarks) against locking on an object on .NET 8.0 and no speed or memory allocation difference was noted, whereas when .NET 9.0 was used the performance was ~25% better as opposed to locking on an object.
