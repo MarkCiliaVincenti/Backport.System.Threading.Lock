@@ -52,4 +52,32 @@ public class LockTests
         myLock.Exit();
         myLock.IsHeldByCurrentThread.Should().BeFalse();
     }
+
+    [Fact]
+    public void ReentrancyTestEnterScope()
+    {
+        Lock myLock = LockFactory.Create();
+        using (myLock.EnterScope())
+        {
+            myLock.IsHeldByCurrentThread.Should().BeTrue();
+            using (myLock.EnterScope())
+            {
+                myLock.IsHeldByCurrentThread.Should().BeTrue();
+            }
+        }
+    }
+
+    [Fact]
+    public void ReentrancyTestLock()
+    {
+        Lock myLock = LockFactory.Create();
+        lock (myLock)
+        {
+            myLock.IsHeldByCurrentThread.Should().BeTrue();
+            lock (myLock)
+            {
+                myLock.IsHeldByCurrentThread.Should().BeTrue();
+            }
+        }
+    }
 }
