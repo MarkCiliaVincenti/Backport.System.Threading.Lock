@@ -4,7 +4,7 @@
 A micro-library that backports/polyfill .NET 9.0+'s `System.Threading.Lock` to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.
 
 ## Why is this useful?
-Apart from streamlining locking, especially with a new [lock statement pattern](https://github.com/dotnet/csharplang/issues/7104) being proposed, and the ability to use the [`using` pattern for locking](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock.enterscope?view=net-9.0#system-threading-lock-enterscope), the more obvious reason for using it is that it gives greater performance than simply locking on an object.
+Apart from streamlining locking, especially with a new [lock statement pattern](https://github.com/dotnet/csharplang/issues/7104) being proposed, and the ability to use the [`using` pattern for locking](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock.enterscope?view=net-9.0#system-threading-lock-enterscope), the more obvious reason for using it is that it gives greater performance (on .NET 9.0+) than simply locking on an object.
 
 ## Why not keep it simple?
 Some developers have opted to put in code like this:
