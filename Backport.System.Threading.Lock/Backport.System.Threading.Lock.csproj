@@ -10,9 +10,9 @@
 		<Version>2.0.3</Version>
 		<PackageIcon>logo.png</PackageIcon>
 		<PackageReleaseNotes>Cleaning up and improved documentation.</PackageReleaseNotes>
-		<Description>A micro-library that backports .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
+		<Description>A micro-library that backports/polyfills .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
-		<PackageTags>System.Threading.Lock,lock,backport,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
+		<PackageTags>System.Threading.Lock,lock,backport,polyfill,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<AssemblyVersion>2.0.3.0</AssemblyVersion>
