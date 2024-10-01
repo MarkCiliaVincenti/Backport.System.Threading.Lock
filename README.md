@@ -18,7 +18,7 @@ global using Lock = System.Object;
 
 This is a trick that works in some cases but limits you in what you want to do. You will be unable to use any of the methods offered by `System.Threading.Lock` such as `EnterScope` that allows you to use the using pattern.
 
-More importantly though, if you need to do something like lock in one method and lock with a timeout in another, you simply can't with this code you put here.
+More importantly though, if you need to do something like lock in one method and lock with a timeout in another, you simply can't with this code above.
 
 On .NET 8.0 or earlier you cannot do a `myLock.Enter(5)` and on .NET 9.0 or later you wouldn't be able to `Monitor.Enter(myLock, 5)` as this gives you the warning "CS9216: A value of type System.Threading.Lock converted to a different type will use likely unintended monitor-based locking in lock statement."
 
