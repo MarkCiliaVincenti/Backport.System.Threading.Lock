@@ -61,7 +61,7 @@ Use this library the same way you would use [System.Threading.Lock](https://lear
 In order to get the performance benefits of `System.Threading.Lock`, you must however [multi-target frameworks](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) in your `.csproj` file.
 
 Example:
-```
+```csharp
 <TargetFrameworks>net5.0;net9.0</TargetFrameworks>
 ```
 
@@ -79,13 +79,13 @@ Due to frameworks prior to .NET 5.0 supporting the notorious `Thread.Abort`, we 
 **IMPORTANT:** You MUST also [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well.
 
 Example:
-```
+```csharp
 <TargetFrameworks>netstandard2.0;net9.0</TargetFrameworks>
 ```
 
 In your `.csproj` file, or ideally in your [Directory.Build.props](https://learn.microsoft.com/en-us/visualstudio/msbuild/customize-by-directory) file to avoid doing it to all projects, do the following:
 
-```
+```csharp
 <ItemGroup>
   <Using Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="System.Threading.Lock" />
   <Using Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="Backport.System.Threading.Lock" />
