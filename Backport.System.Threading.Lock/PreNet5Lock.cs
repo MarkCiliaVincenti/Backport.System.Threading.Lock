@@ -77,6 +77,7 @@ public sealed class Lock
 #endif
     public void Exit() => Monitor.Exit(this);
 
+#if !PRE_NETSTANDARD    
     /// <summary>
     /// Determines whether the current thread holds this lock.
     /// </summary>
@@ -84,10 +85,7 @@ public sealed class Lock
     /// true if the current thread holds this lock; otherwise, false.
     /// </returns>
     /// <exception cref="ArgumentNullException"/>
-#if !PRE_NETSTANDARD
     public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
-#else
-    public bool IsHeldByCurrentThread => throw new NotSupportedException("IsHeldByCurrentThread is only supported on .NET Framework 4.5 or greater.");
 #endif
 
     /// <summary>
