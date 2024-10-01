@@ -9,7 +9,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Version>2.0.4</Version>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Cleaning up and improved documentation.</PackageReleaseNotes>
+		<PackageReleaseNotes>Made IsHeldByCurrentThread unavailable for frameworks that don't support Monitor.IsEntered rather than throwing a NotSupportedException.</PackageReleaseNotes>
 		<Description>A micro-library that backports/polyfills .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
 		<PackageTags>System.Threading.Lock,lock,backport,polyfill,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
