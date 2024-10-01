@@ -76,7 +76,7 @@ There is also no need to reference this library as a dependency for .NET 9.0+. Y
 ### <a name="prior-to-net50"></a>Factory method (if targeting frameworks prior to .NET 5.0)
 Due to frameworks prior to .NET 5.0 supporting the notorious `Thread.Abort`, we cannot use the same `System.Threading.Lock` namespace or else the locks would not be hardened against thread aborts, so we need to use a creator method instead.
 
-You must also [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well.
+**IMPORTANT:** You MUST also [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well.
 
 Example:
 ```
