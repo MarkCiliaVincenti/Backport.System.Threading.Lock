@@ -52,10 +52,10 @@ If you want to avoid limiting what you are able to do, you need a solution such 
 ## Usage
 There are two methods for using this library:
 
-1. If you are only targeting .NET 5.0 or greater, then you are strongly recommended to use the [clean method](#net50-or-greater).
-2. If you need to target frameworks prior to .NET 5.0 (and that would also include .NET Standard 2.0 and 2.1), then you need to use the [factory method](#prior-to-net50) because the clean method cannot be hardened against thread aborts which were removed in .NET 5.0.
+1. **Clean method** — If you are only targeting .NET 5.0 or greater, then you are strongly recommended to use the [clean method](#net50-or-greater).
+2. **Factory method** — If you need to target frameworks prior to .NET 5.0 (and that would also include .NET Standard 2.0 and 2.1), then you need to use the [factory method](#prior-to-net50) because the clean method cannot be hardened against thread aborts which were removed in .NET 5.0.
 
-### <a name="net50-or-greater"></a>Clean method: (if only targeting .NET 5.0 or greater)
+### <a name="net50-or-greater"></a>Clean method (if only targeting .NET 5.0 or greater)
 Use this library the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0).
 
 In order to get the performance benefits of `System.Threading.Lock`, you must however [multi-target frameworks](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) in your `.csproj` file.
@@ -73,7 +73,7 @@ There is also no need to reference this library as a dependency for .NET 9.0+. Y
 </ItemGroup>
 ```
 
-### <a name="prior-to-net50"></a>Factory method: (if targeting frameworks prior to .NET 5.0)
+### <a name="prior-to-net50"></a>Factory method (if targeting frameworks prior to .NET 5.0)
 Due to frameworks prior to .NET 5.0 supporting the notorious `Thread.Abort`, we cannot use the same `System.Threading.Lock` namespace or else the locks would not be hardened against thread aborts, so we need to use a creator method instead.
 
 You must also [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well.
