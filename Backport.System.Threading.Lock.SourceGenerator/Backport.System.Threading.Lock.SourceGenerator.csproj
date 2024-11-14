@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net35;net40;net45;netstandard2.0;net5.0;net6.0;net7.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<Authors>Mark Cilia Vincenti</Authors>
 		<RepositoryUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>2.0.7</Version>
+		<Version>2.0.7-a</Version>
 		<PackageIcon>logo.png</PackageIcon>
 		<PackageReleaseNotes>Final .NET 9.0 release.</PackageReleaseNotes>
 		<Description>A micro-library that backports/polyfills .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
@@ -23,19 +23,19 @@
 		<EnableNETAnalyzers>True</EnableNETAnalyzers>
 		<AnalysisLevel>latest</AnalysisLevel>
 		<SignAssembly>True</SignAssembly>
-		<AssemblyOriginatorKeyFile>Backport.System.Threading.Lock.snk</AssemblyOriginatorKeyFile>
+		<AssemblyOriginatorKeyFile>Backport.System.Threading.Lock.SourceGenerator.snk</AssemblyOriginatorKeyFile>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 		<ImplicitUsings>false</ImplicitUsings>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(DefineConstants.Contains(AOT_COMPATIBLE))">
-	  <IsAotCompatible>true</IsAotCompatible>
-	  <PublishAot>true</PublishAot>
+		<IsAotCompatible>true</IsAotCompatible>
+		<PublishAot>true</PublishAot>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(DefineConstants.Contains(TRIMMING_COMPATIBLE))">
-	  <PublishTrimmed>true</PublishTrimmed>
-	  <TrimmerDefaultAction>link</TrimmerDefaultAction>
+		<PublishTrimmed>true</PublishTrimmed>
+		<TrimmerDefaultAction>link</TrimmerDefaultAction>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -43,10 +43,21 @@
 		<Optimize>true</Optimize>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+		<DevelopmentDependency>true</DevelopmentDependency>
+		<IncludeSymbols>false</IncludeSymbols>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+	</PropertyGroup>
+
+	<ItemGroup Label="DependencyPackaging">
+		<None Include="$(OutputPath)/netstandard2.0/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+	</ItemGroup>
+
 	<ItemGroup>
-	  <Compile Remove="Properties\PublishProfiles\**" />
-	  <EmbeddedResource Remove="Properties\PublishProfiles\**" />
-	  <None Remove="Properties\PublishProfiles\**" />
+		<Compile Remove="Properties\PublishProfiles\**" />
+		<EmbeddedResource Remove="Properties\PublishProfiles\**" />
+		<None Remove="Properties\PublishProfiles\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -65,6 +76,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="../Backport.System.Threading.Lock/Lock.cs" />
+		<EmbeddedResource Include="../Backport.System.Threading.Lock/LockFactory.cs" />
+		<EmbeddedResource Include="../Backport.System.Threading.Lock/PreNet5Lock.cs" />
+		<EmbeddedResource Include="../Backport.System.Threading.Lock/Properties/AssemblyInfo.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="All" />
 	</ItemGroup>
 </Project>
