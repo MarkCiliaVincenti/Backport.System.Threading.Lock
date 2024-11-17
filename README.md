@@ -1,10 +1,13 @@
 # ![Backport.System.Threading.Lock](https://raw.githubusercontent.com/MarkCiliaVincenti/Backport.System.Threading.Lock/master/logo32.png) Backport.System.Threading.Lock
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/MarkCiliaVincenti/Backport.System.Threading.Lock/dotnet.yml?branch=master&logo=github&style=flat)](https://actions-badge.atrox.dev/MarkCiliaVincenti/Backport.System.Threading.Lock/goto?ref=master) [![NuGet](https://img.shields.io/nuget/v/Backport.System.Threading.Lock?label=NuGet&logo=nuget&style=flat)](https://www.nuget.org/packages/Backport.System.Threading.Lock) [![NuGet](https://img.shields.io/nuget/dt/Backport.System.Threading.Lock?logo=nuget&style=flat)](https://www.nuget.org/packages/Backport.System.Threading.Lock) [![Codacy Grade](https://img.shields.io/codacy/grade/46617e1e645948ce9799026c84b7f1e1?style=flat)](https://app.codacy.com/gh/MarkCiliaVincenti/Backport.System.Threading.Lock/dashboard) [![Codecov](https://img.shields.io/codecov/c/github/MarkCiliaVincenti/Backport.System.Threading.Lock?label=coverage&logo=codecov&style=flat)](https://app.codecov.io/gh/MarkCiliaVincenti/Backport.System.Threading.Lock)
 
-A micro-library that backports/polyfill .NET 9.0+'s `System.Threading.Lock` to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.
+A micro-library that backports/polyfill .NET 9.0+'s `System.Threading.Lock` to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible. Optionally works as a source generator.
 
 ## Why is this useful?
 Apart from streamlining locking, especially with a new [lock statement pattern](https://github.com/dotnet/csharplang/issues/7104) being proposed, and the ability to use the [`using` pattern for locking](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock.enterscope?view=net-9.0#system-threading-lock-enterscope), the more obvious reason for using it is that it gives greater performance (on .NET 9.0+) than simply locking on an object.
+
+## Do I need to add a dependency to my project?
+Since version 3.0.0, Backport.System.Threading.Lock can optionally work as a source generator, meaning that a DLL file won't get added to your output. Read further on for more information.
 
 ## Why not keep it simple?
 Some developers have opted to put in code like this:
@@ -49,8 +52,10 @@ void DoThat()
 
 If you want to avoid limiting what you are able to do, you need a solution such as this library.
 
-## Usage
-There are two methods for using this library:
+## Usage (as a dependency)
+Adding this library as a dependency allows whatever depends on your project to also make use of Backport.System.Threading.Lock.
+
+There are two methods for using this library as a dependency:
 
 1. **Clean method:** If you are only targeting .NET 5.0 or greater, then you are strongly recommended to use the clean method.
 2. **Factory method:** If you need to target frameworks prior to .NET 5.0 (and that would also include .NET Standard 2.0 and 2.1), then you need to use the factory method because the clean method cannot be hardened against thread aborts which were removed in .NET 5.0.
@@ -66,9 +71,7 @@ Example:
 There is also no need to reference this library as a dependency for .NET 9.0+. You can achieve that by having this in your `.csproj` file:
 
 ```
-<ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
-  <PackageReference Include="Backport.System.Threading.Lock" Version="2.0.7" />  
-</ItemGroup>
+<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="2.0.7" />  
 ```
 
 Use this library the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0). Example:
@@ -107,6 +110,7 @@ In your `.csproj` file, or ideally in your [Directory.Build.props](https://learn
 
 ```csharp
 <ItemGroup>
+  <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.0" />  
   <Using Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="System.Threading.Lock" />
   <Using Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="Backport.System.Threading.Lock" />
   <Using Alias="LockFactory" Include="Backport.System.Threading.LockFactory" />
@@ -134,6 +138,45 @@ public void Bar()
 ```
 
 Use the `Lock` class the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0).
+
+## Usage (as a source generator)
+The usage as a source generator is almost identical to using it as a dependency. The only difference is changing:
+
+```csharp
+<PackageReference Include="Backport.System.Threading.Lock" Version="3.0.0" />  
+```
+
+to:
+
+```csharp
+<PackageReference Include="Backport.System.Threading.Lock" Version="3.0.0">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>analyzers</IncludeAssets>
+</ProjectReference>
+```
+
+Therefore in the clean method (if only targeting .NET 5.0 or greater):
+
+<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.0">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>analyzers</IncludeAssets>
+</ProjectReference>
+
+and in the factory method (if targeting frameworks prior to .NET 5.0):
+
+```csharp
+<ItemGroup>
+  <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.0">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>analyzers</IncludeAssets>
+  </ProjectReference>
+  <Using Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="System.Threading.Lock" />
+  <Using Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="Backport.System.Threading.Lock" />
+  <Using Alias="LockFactory" Include="Backport.System.Threading.LockFactory" />
+</ItemGroup>
+```
+
+**IMPORTANT:** You MUST also [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well.
 
 ## Performance
 This library was [benchmarked](https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock/tree/master/Backport.System.Threading.Lock.Benchmarks) against locking on an object on .NET 8.0 and no speed or memory allocation difference was noted, whereas when .NET 9.0 was used the performance was ~25% better as opposed to locking on an object.

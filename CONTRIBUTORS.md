@@ -6,3 +6,4 @@
 * [Mark Cilia Vincenti](https://github.com/MarkCiliaVincenti) as the project owner
 * [Tim Cassell](https://github.com/timcassell) on whose [answer](https://github.com/dotnet/runtime/issues/34812#issuecomment-2282241916) this library was based on
 * [Stuart Turner](https://github.com/viceroypenguin) for proposing the use of type forwarding
+* [Wesley Baartman](https://github.com/CptWesley) for proposing and creating the initial source generator

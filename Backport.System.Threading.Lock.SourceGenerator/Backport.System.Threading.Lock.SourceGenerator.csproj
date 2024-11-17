@@ -2,23 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
-		<Authors>Mark Cilia Vincenti</Authors>
-		<RepositoryUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock.git</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
-		<Copyright>MIT</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>2.0.7</Version>
-		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Final .NET 9.0 release.</PackageReleaseNotes>
-		<Description>A micro-library that backports/polyfills .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible.</Description>
-		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
-		<PackageTags>System.Threading.Lock,lock,backport,polyfill,backward,compatible,compatibility,synchronization,synchronisation</PackageTags>
-		<RepositoryType>git</RepositoryType>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>2.0.7.0</AssemblyVersion>
-		<FileVersion>2.0.7.0</FileVersion>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<IsPackable>true</IsPackable>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+		<IsTestProject>false</IsTestProject>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 		<EnableNETAnalyzers>True</EnableNETAnalyzers>
 		<AnalysisLevel>latest</AnalysisLevel>
@@ -26,24 +12,6 @@
 		<AssemblyOriginatorKeyFile>Backport.System.Threading.Lock.SourceGenerator.snk</AssemblyOriginatorKeyFile>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 		<ImplicitUsings>false</ImplicitUsings>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$(DefineConstants.Contains(AOT_COMPATIBLE))">
-		<IsAotCompatible>true</IsAotCompatible>
-		<PublishAot>true</PublishAot>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$(DefineConstants.Contains(TRIMMING_COMPATIBLE))">
-		<PublishTrimmed>true</PublishTrimmed>
-		<TrimmerDefaultAction>link</TrimmerDefaultAction>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Optimize>true</Optimize>
-	</PropertyGroup>
-
-	<PropertyGroup>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 		<DevelopmentDependency>true</DevelopmentDependency>
 		<IncludeSymbols>false</IncludeSymbols>
@@ -61,24 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="..\logo.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="..\CONTRIBUTORS.md">
-			<Pack>False</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="../Backport.System.Threading.Lock/Lock.cs" />
-		<EmbeddedResource Include="../Backport.System.Threading.Lock/LockFactory.cs" />
-		<EmbeddedResource Include="../Backport.System.Threading.Lock/PreNet5Lock.cs" />
+		<EmbeddedResource Include="../Backport.System.Threading.Lock/*.cs" />
 		<EmbeddedResource Include="../Backport.System.Threading.Lock/Properties/AssemblyInfo.cs" />
 	</ItemGroup>
 
