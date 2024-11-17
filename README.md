@@ -157,10 +157,12 @@ to:
 
 Therefore in the clean method (if only targeting .NET 5.0 or greater):
 
+```csharp
 <PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.1">
   <PrivateAssets>all</PrivateAssets>
   <IncludeAssets>analyzers</IncludeAssets>
 </PackageReference>
+```
 
 and in the factory method (if targeting frameworks prior to .NET 5.0):
 
