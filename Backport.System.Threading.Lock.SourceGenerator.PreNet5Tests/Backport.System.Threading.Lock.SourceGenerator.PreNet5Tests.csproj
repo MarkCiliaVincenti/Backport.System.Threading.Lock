@@ -31,10 +31,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Backport.System.Threading.Lock\Backport.System.Threading.Lock.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Backport.System.Threading.Lock.SourceGenerator\Backport.System.Threading.Lock.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
