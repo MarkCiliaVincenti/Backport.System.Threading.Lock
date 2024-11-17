@@ -71,7 +71,7 @@ Example:
 There is also no need to reference this library as a dependency for .NET 9.0+. You can achieve that by having this in your `.csproj` file:
 
 ```
-<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="2.0.7" />  
+<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.1" />  
 ```
 
 Use this library the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0). Example:
