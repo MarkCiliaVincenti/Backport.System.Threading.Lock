@@ -64,7 +64,7 @@ There are two methods for using this library as a dependency:
 In order to get the performance benefits of `System.Threading.Lock`, you must however [multi-target frameworks](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) in your `.csproj` file.
 
 Example:
-```csharp
+```xml
 <TargetFrameworks>net5.0;net9.0</TargetFrameworks>
 ```
 
