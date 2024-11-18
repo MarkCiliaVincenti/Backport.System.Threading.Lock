@@ -102,13 +102,13 @@ Due to frameworks prior to .NET 5.0 supporting the notorious `Thread.Abort`, we 
 **IMPORTANT:** You MUST also [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well.
 
 Example:
-```csharp
+```xml
 <TargetFrameworks>netstandard2.0;net9.0</TargetFrameworks>
 ```
 
 In your `.csproj` file, or ideally in your [Directory.Build.props](https://learn.microsoft.com/en-us/visualstudio/msbuild/customize-by-directory) file to avoid doing it to all projects, do the following:
 
-```csharp
+```xml
 <ItemGroup>
   <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.1" />  
   <Using Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="System.Threading.Lock" />
@@ -142,13 +142,13 @@ Use the `Lock` class the same way you would use [System.Threading.Lock](https://
 ## Usage (as a source generator)
 The usage as a source generator is almost identical to using it as a dependency. The only difference is changing:
 
-```csharp
+```xml
 <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.1" />  
 ```
 
 to:
 
-```csharp
+```xml
 <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.1">
   <PrivateAssets>all</PrivateAssets>
   <IncludeAssets>analyzers</IncludeAssets>
@@ -157,7 +157,7 @@ to:
 
 Therefore in the clean method (if only targeting .NET 5.0 or greater):
 
-```csharp
+```xml
 <PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.1">
   <PrivateAssets>all</PrivateAssets>
   <IncludeAssets>analyzers</IncludeAssets>
@@ -166,7 +166,7 @@ Therefore in the clean method (if only targeting .NET 5.0 or greater):
 
 and in the factory method (if targeting frameworks prior to .NET 5.0):
 
-```csharp
+```xml
 <ItemGroup>
   <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.1">
     <PrivateAssets>all</PrivateAssets>
