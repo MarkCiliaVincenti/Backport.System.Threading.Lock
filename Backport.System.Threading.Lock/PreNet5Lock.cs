@@ -1,6 +1,6 @@
 ﻿#if !NET9_0_OR_GREATER
 using System;
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
 using System.Runtime.CompilerServices;
 #endif
 using System.Threading;
@@ -29,7 +29,7 @@ public
         /// <inheritdoc cref="Monitor.Enter(object)"/>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public void Enter() => Monitor.Enter(this);
@@ -41,7 +41,7 @@ public
         /// <inheritdoc cref="Monitor.TryEnter(object)"/>
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public bool TryEnter() => Monitor.TryEnter(this);
@@ -54,7 +54,7 @@ public
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentOutOfRangeException"/>
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public bool TryEnter(TimeSpan timeout) => Monitor.TryEnter(this, timeout);
@@ -67,7 +67,7 @@ public
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentOutOfRangeException"/>
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public bool TryEnter(int millisecondsTimeout) => Monitor.TryEnter(this, millisecondsTimeout);
@@ -77,12 +77,12 @@ public
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="SynchronizationLockException"/>
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public void Exit() => Monitor.Exit(this);
 
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         /// <summary>
         /// Determines whether the current thread holds this lock.
         /// </summary>
@@ -107,7 +107,7 @@ public
         /// disposing the returned <see cref="Scope"/>, as many times as it had entered the lock to fully exit the lock and
         /// allow other threads to enter the lock.
         /// </remarks>
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
 #if (NET40_OR_GREATER || NETSTANDARD2_0_OR_GREATER) && !NET5_0_OR_GREATER
@@ -149,7 +149,7 @@ public
             /// <exception cref="SynchronizationLockException">
             /// The calling thread does not hold the lock.
             /// </exception>
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
             public readonly void Dispose() => @lock.Exit();

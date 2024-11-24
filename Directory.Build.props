@@ -6,9 +6,6 @@
 	  <CheckEolTargetFramework>false</CheckEolTargetFramework>
 	  <NoWarn>IDE0130</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net45')) and !$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.0'))">
-    <DefineConstants>PRE_NETSTANDARD</DefineConstants>
-  </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
 	<DefineConstants>TRIMMING_COMPATIBLE</DefineConstants>
   </PropertyGroup>

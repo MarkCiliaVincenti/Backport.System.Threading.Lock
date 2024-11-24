@@ -1,4 +1,4 @@
-﻿#if !PRE_NETSTANDARD
+﻿#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
 using System.Runtime.CompilerServices;
 #endif
 #if NET9_0_OR_GREATER
@@ -39,7 +39,7 @@ public
         /// If your project does not target anything before .NET 5.0, you do not need to use this; simply use System.Threading.Lock.
         /// </summary>
         /// <returns>An instance of <see cref="Lock"/>.</returns>
-#if !PRE_NETSTANDARD
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static Lock Create() => new();
