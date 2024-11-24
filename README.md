@@ -71,7 +71,7 @@ Example:
 There is also no need to reference this library as a dependency for .NET 9.0+. You can achieve that by having this in your `.csproj` file:
 
 ```xml
-<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.1" />  
+<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.3" />  
 ```
 
 Use this library the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0). Example:
@@ -110,7 +110,7 @@ In your `.csproj` file, or ideally in your [Directory.Build.props](https://learn
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.1" />  
+  <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.3" />  
   <Using Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="System.Threading.Lock" />
   <Using Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="Backport.System.Threading.Lock" />
   <Using Alias="LockFactory" Include="Backport.System.Threading.LockFactory" />
@@ -143,13 +143,13 @@ Use the `Lock` class the same way you would use [System.Threading.Lock](https://
 The usage as a source generator is almost identical to using it as a dependency. The only difference is changing:
 
 ```xml
-<PackageReference Include="Backport.System.Threading.Lock" Version="3.0.1" />  
+<PackageReference Include="Backport.System.Threading.Lock" Version="3.0.3" />  
 ```
 
 to:
 
 ```xml
-<PackageReference Include="Backport.System.Threading.Lock" Version="3.0.1">
+<PackageReference Include="Backport.System.Threading.Lock" Version="3.0.3">
   <PrivateAssets>all</PrivateAssets>
   <IncludeAssets>analyzers</IncludeAssets>
 </PackageReference>
@@ -158,7 +158,7 @@ to:
 Therefore in the clean method (if only targeting .NET 5.0 or greater):
 
 ```xml
-<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.1">
+<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.3">
   <PrivateAssets>all</PrivateAssets>
   <IncludeAssets>analyzers</IncludeAssets>
 </PackageReference>
@@ -168,7 +168,7 @@ and in the factory method (if targeting frameworks prior to .NET 5.0):
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.1">
+  <PackageReference Include="Backport.System.Threading.Lock" Version="3.0.3">
     <PrivateAssets>all</PrivateAssets>
     <IncludeAssets>analyzers</IncludeAssets>
   </PackageReference>
