@@ -1,7 +1,6 @@
 # Documentation: https://docs.codecov.io/docs/codecov-yaml
 
 codecov:
-    token: c36b1125-180e-4729-8963-182f3600ff5e
     # Avoid "Missing base report"
     # https://github.com/codecov/support/issues/363
     # https://docs.codecov.io/docs/comparing-commits
