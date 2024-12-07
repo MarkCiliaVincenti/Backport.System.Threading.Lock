@@ -7,16 +7,16 @@
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>3.0.3</Version>
+		<Version>3.0.4-beta</Version>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Fixes an issue with the source generator breaking for .NET Framework 3.5 and .NET Framework 4.0.</PackageReleaseNotes>
+		<PackageReleaseNotes>Fixes an issue with file conflicts.</PackageReleaseNotes>
 		<Description>A micro-library that backports/polyfills .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible. Optionally works as a source generator.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
 		<PackageTags>System.Threading.Lock,lock,backport,polyfill,backward,compatible,compatibility,synchronization,synchronisation,source generator,analyzer</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>3.0.3.0</AssemblyVersion>
-		<FileVersion>3.0.3.0</FileVersion>
+		<AssemblyVersion>3.0.3.2</AssemblyVersion>
+		<FileVersion>3.0.3.2</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -47,6 +47,12 @@
 	  <Compile Remove="Properties\PublishProfiles\**" />
 	  <EmbeddedResource Remove="Properties\PublishProfiles\**" />
 	  <None Remove="Properties\PublishProfiles\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Lock.cs" />
+	  <Compile Remove="LockFactory.cs" />
+	  <Compile Remove="PreNet5Lock.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

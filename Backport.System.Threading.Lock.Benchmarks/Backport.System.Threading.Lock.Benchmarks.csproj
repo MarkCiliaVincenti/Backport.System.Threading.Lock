@@ -13,8 +13,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Backport.System.Threading.Lock\Backport.System.Threading.Lock.csproj" />
-	  <TrimmerRootAssembly Include="Backport.System.Threading.Lock" />
+		<PackageReference Include="Backport.System.Threading.Lock" />
+		<TrimmerRootAssembly Include="Backport.System.Threading.Lock" />
 	</ItemGroup>
 
 </Project>
