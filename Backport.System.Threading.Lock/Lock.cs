@@ -1,4 +1,4 @@
-﻿#if NET5_0_OR_GREATER && !NET9_0_OR_GREATER
+﻿#if (NETSTANDARD2_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER) && !NET9_0_OR_GREATER
 using System.Runtime.CompilerServices;
 
 namespace System.Threading

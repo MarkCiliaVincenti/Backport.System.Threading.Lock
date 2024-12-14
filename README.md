@@ -57,10 +57,10 @@ Adding this library as a dependency allows whatever depends on your project to a
 
 There are two methods for using this library as a dependency:
 
-1. **Clean method:** If you are only targeting .NET 5.0 or greater, then you are strongly recommended to use the clean method.
-2. **Factory method:** If you need to target frameworks prior to .NET 5.0 (and that would also include .NET Standard 2.0 and 2.1), then you need to use the factory method because the clean method cannot be hardened against thread aborts which were removed in .NET 5.0.
+1. **Clean method:** If you are only targeting .NET Core 1.0+, .NET 5.0+ or .NET Standard 2.1, then you are strongly recommended to use the clean method.
+2. **Factory method:** If you need to target the .NET Framework (and that would also include .NET Standard 2.0), then you need to use the factory method because the clean method cannot be hardened against thread aborts which were removed in .NET Core 1.0 and .NET 5.0.
 
-### Clean method (if only targeting .NET 5.0 or greater)
+### Clean method (if only targeting .NET Core 1.0+, .NET 5.0+ or .NET Standard 2.1)
 In order to get the performance benefits of `System.Threading.Lock`, you must however [multi-target frameworks](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) in your `.csproj` file.
 
 Example:
@@ -71,7 +71,7 @@ Example:
 There is also no need to reference this library as a dependency for .NET 9.0+. You can achieve that by having this in your `.csproj` file:
 
 ```xml
-<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.3" />  
+<PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.3" />
 ```
 
 Use this library the same way you would use [System.Threading.Lock](https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0). Example:
@@ -96,8 +96,8 @@ public void Bar()
 }
 ```
 
-### Factory method (if targeting frameworks prior to .NET 5.0)
-Due to frameworks prior to .NET 5.0 supporting the notorious `Thread.Abort`, we cannot use the same `System.Threading.Lock` namespace or else the locks would not be hardened against thread aborts, so we need to use a creator method instead.
+### Factory method (if targeting the .NET Framework, including .NET Standard 2.0)
+Due to the .NET Framewok supporting the notorious `Thread.Abort`, we cannot use the same `System.Threading.Lock` namespace or else the locks would not be hardened against thread aborts, so we need to use a creator method instead.
 
 **IMPORTANT:** You MUST also [multi-target](https://learn.microsoft.com/en-us/nuget/create-packages/multiple-target-frameworks-project-file) .NET 9.0 in your `.csproj` file as well.
 
@@ -155,7 +155,7 @@ to:
 </PackageReference>
 ```
 
-Therefore in the clean method (if only targeting .NET 5.0 or greater):
+Therefore in the clean method (if only targeting .NET Core 1.0+, .NET 5.0+ or .NET Standard 2.1):
 
 ```xml
 <PackageReference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Include="Backport.System.Threading.Lock" Version="3.0.3">
@@ -164,7 +164,7 @@ Therefore in the clean method (if only targeting .NET 5.0 or greater):
 </PackageReference>
 ```
 
-and in the factory method (if targeting frameworks prior to .NET 5.0):
+and in the factory method (if targeting the .NET Framework, including .NET Standard 2.0):
 
 ```xml
 <ItemGroup>

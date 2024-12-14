@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net35;net40;net45;netstandard2.0;net5.0;net6.0;net7.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>net35;net40;net45;netstandard2.0;netcoreapp1.0;netstandard2.1;net5.0;net6.0;net7.0;net9.0</TargetFrameworks>
 		<Authors>Mark Cilia Vincenti</Authors>
 		<RepositoryUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>3.0.3</Version>
+		<Version>3.1.0</Version>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Fixes an issue with the source generator breaking for .NET Framework 3.5 and .NET Framework 4.0.</PackageReleaseNotes>
+		<PackageReleaseNotes>Enables the 'clean method' for .NET Core and .NET Standard 2.1, and fixes an issue with warnings thrown when the library is used as a dependency.</PackageReleaseNotes>
 		<Description>A micro-library that backports/polyfills .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible. Optionally works as a source generator.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
 		<PackageTags>System.Threading.Lock,lock,backport,polyfill,backward,compatible,compatibility,synchronization,synchronisation,source generator,analyzer</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>3.0.3.0</AssemblyVersion>
-		<FileVersion>3.0.3.0</FileVersion>
+		<AssemblyVersion>3.1.0.0</AssemblyVersion>
+		<FileVersion>3.1.0.0</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
