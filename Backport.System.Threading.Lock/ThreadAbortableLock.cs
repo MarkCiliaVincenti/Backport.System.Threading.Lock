@@ -1,4 +1,7 @@
-﻿#if !NET9_0_OR_GREATER
+﻿// Copyright (c) All contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+#if !NET9_0_OR_GREATER
 using System;
 #if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
 using System.Runtime.CompilerServices;
@@ -16,19 +19,40 @@ namespace Backport.System.Threading
     /// that holds a lock may enter the lock repeatedly without exiting it, such as recursively, in which case the thread should
     /// eventually exit the lock the same number of times to fully exit the lock and allow other threads to enter the lock.
     /// </remarks>
+#pragma warning disable SA1649 // SA1649FileNameMustMatchTypeName
 #if SOURCE_GENERATOR
-internal
+    internal
 #else
-public
+    public
 #endif
-    sealed class Lock
+        sealed class Lock
+#pragma warning restore SA1649 // SA1649FileNameMustMatchTypeName
     {
-        internal Lock() { }
+#pragma warning disable SA1642 // ConstructorSummaryDocumentationMustBeginWithStandardText
+        /// <summary>
+        /// Use <see cref="LockFactory.Create()"/> instead.
+        /// </summary>
+#pragma warning restore SA1642 // ConstructorSummaryDocumentationMustBeginWithStandardText
+        internal Lock()
+        {
+        }
+
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
+        /// <summary>
+        /// Determines whether the current thread holds this lock.
+        /// </summary>
+        /// <returns>
+        /// true if the current thread holds this lock; otherwise, false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><inheritdoc cref="ArgumentNullException"/></exception>
+#pragma warning disable SA1623 // Property summary documentation should match accessors
+        public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
+#pragma warning restore SA1623 // Property summary documentation should match accessors
+#endif
 
         /// <summary>
         /// <inheritdoc cref="Monitor.Enter(object)"/>
         /// </summary>
-        /// <exception cref="ArgumentNullException"/>
 #if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
@@ -40,7 +64,6 @@ public
         /// <returns>
         /// <inheritdoc cref="Monitor.TryEnter(object)"/>
         /// </returns>
-        /// <exception cref="ArgumentNullException"/>
 #if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
@@ -52,8 +75,10 @@ public
         /// <returns>
         /// <inheritdoc cref="Monitor.TryEnter(object, TimeSpan)"/>
         /// </returns>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentOutOfRangeException"/>
+        /// <param name="timeout">A <see cref="TimeSpan" /> representing the amount of time to wait for the lock.
+        /// A value of -1 millisecond specifies an infinite wait.</param>
+        /// <exception cref="ArgumentOutOfRangeException">The value of timeout in milliseconds is negative and is not equal to <see cref="Timeout.Infinite"/>
+        /// (-1 millisecond), or is greater than <see cref="int.MaxValue"/>.</exception>
 #if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
@@ -65,8 +90,8 @@ public
         /// <returns>
         /// <inheritdoc cref="Monitor.TryEnter(object, int)"/>
         /// </returns>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentOutOfRangeException"/>
+        /// <param name="millisecondsTimeout">The number of milliseconds to wait for the lock.</param>
+        /// <exception cref="ArgumentOutOfRangeException">millisecondsTimeout is negative, and not equal to <see cref="Timeout.Infinite"/>.</exception>
 #if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
@@ -75,23 +100,11 @@ public
         /// <summary>
         /// <inheritdoc cref="Monitor.Exit(object)"/>
         /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="SynchronizationLockException"/>
+        /// <exception cref="SynchronizationLockException"><inheritdoc cref="Monitor.Exit(object)"/></exception>
 #if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public void Exit() => Monitor.Exit(this);
-
-#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
-        /// <summary>
-        /// Determines whether the current thread holds this lock.
-        /// </summary>
-        /// <returns>
-        /// true if the current thread holds this lock; otherwise, false.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"/>
-        public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
-#endif
 
         /// <summary>
         /// Enters the lock and returns a <see cref="Scope"/> that may be disposed to exit the lock. Once the method returns,
@@ -111,21 +124,25 @@ public
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
 #if (NET40_OR_GREATER || NETSTANDARD2_0_OR_GREATER) && !NET5_0_OR_GREATER
-    [Obsolete("This method is a best-effort at hardening against thread aborts, but can theoretically retain lock on pre-.NET 5.0. Use with caution.")]
-    public Scope EnterScope()
-    {
-        bool lockTaken = false;
-        try
+        [Obsolete("This method is a best-effort at hardening against thread aborts, but can theoretically retain lock on pre-.NET 5.0. Use with caution.")]
+        public Scope EnterScope()
         {
-            Monitor.Enter(this, ref lockTaken);
-            return new Scope(this);
+            bool lockTaken = false;
+            try
+            {
+                Monitor.Enter(this, ref lockTaken);
+                return new Scope(this);
+            }
+            catch (ThreadAbortException)
+            {
+                if (lockTaken)
+                {
+                    Monitor.Exit(this);
+                }
+
+                throw;
+            }
         }
-        catch (ThreadAbortException)
-        {
-            if (lockTaken) Monitor.Exit(this);
-            throw;
-        }
-    }
 #else
         public Scope EnterScope()
         {

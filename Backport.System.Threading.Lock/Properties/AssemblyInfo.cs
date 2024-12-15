@@ -1,4 +1,7 @@
-﻿using System.Security;
+﻿// Copyright (c) All contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System.Security;
 #if NET9_0_OR_GREATER
 using System.Runtime.CompilerServices;
 
@@ -6,5 +9,5 @@ using System.Runtime.CompilerServices;
 #endif
 
 #if !SOURCE_GENERATOR
-[assembly: SecurityTransparent()]
+[assembly: SecurityTransparent]
 #endif

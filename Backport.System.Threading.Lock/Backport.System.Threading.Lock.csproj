@@ -7,16 +7,16 @@
 		<PackageProjectUrl>https://github.com/MarkCiliaVincenti/Backport.System.Threading.Lock</PackageProjectUrl>
 		<Copyright>MIT</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>3.1.0</Version>
+		<Version>3.1.1</Version>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageReleaseNotes>Enables the 'clean method' for .NET Core and .NET Standard 2.1, and fixes an issue with warnings thrown when the library is used as a dependency.</PackageReleaseNotes>
+		<PackageReleaseNotes>StyleCop changes, improved documentation, dependency update.</PackageReleaseNotes>
 		<Description>A micro-library that backports/polyfills .NET 9.0+'s System.Threading.Lock to prior framework versions (from .NET Framework 3.5 up to .NET 8.0), providing as much backward compatibility as possible. Optionally works as a source generator.</Description>
 		<Copyright>© 2024 Mark Cilia Vincenti</Copyright>
 		<PackageTags>System.Threading.Lock,lock,backport,polyfill,backward,compatible,compatibility,synchronization,synchronisation,source generator,analyzer</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyVersion>3.1.0.0</AssemblyVersion>
-		<FileVersion>3.1.0.0</FileVersion>
+		<AssemblyVersion>3.1.1.0</AssemblyVersion>
+		<FileVersion>3.1.1.0</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsPackable>true</IsPackable>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>

@@ -1,4 +1,7 @@
-﻿#if (NETSTANDARD2_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER) && !NET9_0_OR_GREATER
+﻿// Copyright (c) All contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+#if (NETSTANDARD2_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER) && !NET9_0_OR_GREATER
 using System.Runtime.CompilerServices;
 
 namespace System.Threading
@@ -21,9 +24,18 @@ public
     {
 #pragma warning disable CS9216 // A value of type 'System.Threading.Lock' converted to a different type will use likely unintended monitor-based locking in 'lock' statement.
         /// <summary>
+        /// Determines whether the current thread holds this lock.
+        /// </summary>
+        /// <returns>
+        /// true if the current thread holds this lock; otherwise, false.
+        /// </returns>
+#pragma warning disable SA1623 // Property summary documentation should match accessors
+        public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
+#pragma warning restore SA1623 // Property summary documentation should match accessors
+
+        /// <summary>
         /// <inheritdoc cref="Monitor.Enter(object)"/>
         /// </summary>
-        /// <exception cref="ArgumentNullException"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Enter() => Monitor.Enter(this);
 
@@ -33,7 +45,6 @@ public
         /// <returns>
         /// <inheritdoc cref="Monitor.TryEnter(object)"/>
         /// </returns>
-        /// <exception cref="ArgumentNullException"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryEnter() => Monitor.TryEnter(this);
 
@@ -43,8 +54,10 @@ public
         /// <returns>
         /// <inheritdoc cref="Monitor.TryEnter(object, TimeSpan)"/>
         /// </returns>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentOutOfRangeException"/>
+        /// <param name="timeout">A <see cref="TimeSpan" /> representing the amount of time to wait for the lock.
+        /// A value of -1 millisecond specifies an infinite wait.</param>
+        /// <exception cref="ArgumentOutOfRangeException">The value of timeout in milliseconds is negative and is not equal to <see cref="Timeout.Infinite"/>
+        /// (-1 millisecond), or is greater than <see cref="int.MaxValue"/>.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryEnter(TimeSpan timeout) => Monitor.TryEnter(this, timeout);
 
@@ -54,27 +67,17 @@ public
         /// <returns>
         /// <inheritdoc cref="Monitor.TryEnter(object, int)"/>
         /// </returns>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentOutOfRangeException"/>
+        /// <param name="millisecondsTimeout">The number of milliseconds to wait for the lock.</param>
+        /// <exception cref="ArgumentOutOfRangeException">millisecondsTimeout is negative, and not equal to <see cref="Timeout.Infinite"/>.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryEnter(int millisecondsTimeout) => Monitor.TryEnter(this, millisecondsTimeout);
 
         /// <summary>
         /// <inheritdoc cref="Monitor.Exit(object)"/>
         /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="SynchronizationLockException"/>
+        /// <exception cref="SynchronizationLockException">The current thread does not own the lock for the specified object.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Exit() => Monitor.Exit(this);
-
-        /// <summary>
-        /// Determines whether the current thread holds this lock.
-        /// </summary>
-        /// <returns>
-        /// true if the current thread holds this lock; otherwise, false.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"/>
-        public bool IsHeldByCurrentThread => Monitor.IsEntered(this);
 #pragma warning restore CS9216 // A value of type 'System.Threading.Lock' converted to a different type will use likely unintended monitor-based locking in 'lock' statement.
 
         /// <summary>
@@ -94,7 +97,7 @@ public
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Scope EnterScope()
         {
-            Enter();
+            this.Enter();
             return new Scope(this);
         }
 

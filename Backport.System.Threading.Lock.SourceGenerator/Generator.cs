@@ -1,16 +1,26 @@
-﻿using Microsoft.CodeAnalysis;
+﻿// Copyright (c) All contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Microsoft.CodeAnalysis;
 
 namespace Backport.System.Threading.Lock.SourceGenerator;
 
+/// <summary>
+/// Source generator for Backport.System.Threading.Lock.
+/// </summary>
 [Generator]
 internal sealed class Generator : IIncrementalGenerator
 {
     private static readonly Assembly Assembly = typeof(Generator).Assembly;
 
+    /// <summary>
+    /// <inheritdoc cref="IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext)"/>
+    /// </summary>
+    /// <param name="context"><inheritdoc cref="IncrementalGeneratorInitializationContext"/></param>
     public void Initialize(IncrementalGeneratorInitializationContext context)
         => context.RegisterSourceOutput(context.CompilationProvider, Generate);
 

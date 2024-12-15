@@ -5,7 +5,7 @@
 		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<NoWarn>CA1822,IDE0130</NoWarn>
+		<NoWarn>CA1822,IDE0130,SA0001</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>

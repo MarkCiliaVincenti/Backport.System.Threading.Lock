@@ -1,15 +1,18 @@
 <Project>
-  <PropertyGroup>
-	  <LangVersion>latest</LangVersion>
-	  <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
-	  <CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
-	  <CheckEolTargetFramework>false</CheckEolTargetFramework>
-	  <NoWarn>IDE0130</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
-	<DefineConstants>TRIMMING_COMPATIBLE</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
-	<DefineConstants>AOT_COMPATIBLE</DefineConstants>
-  </PropertyGroup>
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+		<CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
+		<NoWarn>IDE0130,SA1625,SA0001</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
+		<DefineConstants>TRIMMING_COMPATIBLE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
+		<DefineConstants>AOT_COMPATIBLE</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+		<AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
 </Project>
