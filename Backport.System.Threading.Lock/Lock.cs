@@ -20,9 +20,9 @@ namespace System.Threading
 #if SOURCE_GENERATOR
 internal
 #else
-public
+    public
 #endif
-    sealed class Lock
+        sealed class Lock
     {
 #pragma warning disable CS9216 // A value of type 'System.Threading.Lock' converted to a different type will use likely unintended monitor-based locking in 'lock' statement.
         /// <summary>
@@ -106,12 +106,7 @@ public
         /// <summary>
         /// A disposable structure that is returned by <see cref="EnterScope()"/>, which when disposed, exits the lock.
         /// </summary>
-#if SOURCE_GENERATOR
-        internal
-#else
-        public
-#endif
-        ref struct Scope(Lock @lock)
+        public ref struct Scope(Lock @lock)
         {
             /// <summary>
             /// Exits the lock.
