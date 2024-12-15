@@ -27,7 +27,7 @@ namespace Backport.System.Threading
 #else
     public
 #endif
-        sealed class Lock
+    sealed class Lock
 #pragma warning restore SA1649 // SA1649FileNameMustMatchTypeName
     {
 #pragma warning disable SA1642 // ConstructorSummaryDocumentationMustBeginWithStandardText
@@ -156,7 +156,12 @@ namespace Backport.System.Threading
         /// <summary>
         /// A disposable structure that is returned by <see cref="EnterScope()"/>, which when disposed, exits the lock.
         /// </summary>
-        public ref struct Scope(Lock @lock)
+#if SOURCE_GENERATOR
+        internal
+#else
+        public
+#endif
+        ref struct Scope(Lock @lock)
         {
             /// <summary>
             /// Exits the lock.
