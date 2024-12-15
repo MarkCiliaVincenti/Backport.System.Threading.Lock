@@ -47,10 +47,14 @@ internal sealed class Generator : IIncrementalGenerator
         using var streamReader = new StreamReader(stream);
         var text = streamReader.ReadToEnd();
 
-        var sb = new StringBuilder();
-        sb.AppendLine("#define SOURCE_GENERATOR");
-        sb.AppendLine(text);
-
-        context.AddSource(resourceName, sb.ToString());
+        var split = text.Split(['\n'], 4);
+        if (split[3].LastOrDefault() == '\r')
+        {
+            context.AddSource(resourceName, $"{split[0]}\n{split[1]}\n{split[2]}\n#define SOURCE_GENERATOR\r\n{split[3]}");
+        }
+        else
+        {
+            context.AddSource(resourceName, $"{split[0]}\n{split[1]}\n{split[2]}\n#define SOURCE_GENERATOR\n{split[3]}");
+        }
     }
 }

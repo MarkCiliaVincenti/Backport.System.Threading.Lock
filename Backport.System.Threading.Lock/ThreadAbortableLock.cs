@@ -1,6 +1,8 @@
 ﻿// Copyright (c) All contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+#pragma warning disable SA1625 // ElementDocumentationMustNotBeCopiedAndPasted
+#pragma warning disable SA1649 // SA1649FileNameMustMatchTypeName
 #if !NET9_0_OR_GREATER
 using System;
 #if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET5_0_OR_GREATER
@@ -154,7 +156,12 @@ namespace Backport.System.Threading
         /// <summary>
         /// A disposable structure that is returned by <see cref="EnterScope()"/>, which when disposed, exits the lock.
         /// </summary>
-        public ref struct Scope(Lock @lock)
+#if SOURCE_GENERATOR
+        internal
+#else
+        public
+#endif
+        ref struct Scope(Lock @lock)
         {
             /// <summary>
             /// Exits the lock.
@@ -174,3 +181,5 @@ namespace Backport.System.Threading
     }
 }
 #endif
+#pragma warning restore SA1649 // SA1649FileNameMustMatchTypeName
+#pragma warning restore SA1625 // ElementDocumentationMustNotBeCopiedAndPasted
