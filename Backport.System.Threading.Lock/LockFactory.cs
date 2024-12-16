@@ -16,12 +16,7 @@ namespace Backport.System.Threading
     /// Represents a factory class for backporting .NET 9.0's System.Threading.Lock to prior framework versions.
     /// If your project does not target anything in the .NET Framework (including .NET Standard 2.0), you do not need to use this; simply use <see cref="FrameworkNamespace.Lock"/>.
     /// </summary>
-#if SOURCE_GENERATOR
-    internal
-#else
-    public
-#endif
-    static class LockFactory
+    public static class LockFactory
     {
     /// <summary>
     /// Creates a new instance of <see cref="FrameworkNamespace.Lock"/>. On frameworks prior to .NET 9.0, a different backported class is returned.

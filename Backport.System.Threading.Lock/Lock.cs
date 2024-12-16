@@ -18,9 +18,9 @@ namespace System.Threading
     /// eventually exit the lock the same number of times to fully exit the lock and allow other threads to enter the lock.
     /// </remarks>
 #if SOURCE_GENERATOR
-    internal
+internal
 #else
-    public
+public
 #endif
     sealed class Lock
     {
