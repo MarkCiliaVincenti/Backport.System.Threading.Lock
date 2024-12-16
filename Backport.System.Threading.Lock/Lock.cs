@@ -106,12 +106,7 @@ namespace System.Threading
         /// <summary>
         /// A disposable structure that is returned by <see cref="EnterScope()"/>, which when disposed, exits the lock.
         /// </summary>
-#if SOURCE_GENERATOR
-        internal
-#else
-        public
-#endif
-        ref struct Scope(Lock @lock)
+        public ref struct Scope(Lock @lock)
         {
             /// <summary>
             /// Exits the lock.
