@@ -2,9 +2,10 @@
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+		<SuppressTfmSupportBuildErrors>true</SuppressTfmSupportBuildErrors>
 		<CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
-		<NoWarn>SA0001,NU1903</NoWarn>
+		<NoWarn>SA0001,NU1903,NU1701</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
 		<DefineConstants>TRIMMING_COMPATIBLE</DefineConstants>
