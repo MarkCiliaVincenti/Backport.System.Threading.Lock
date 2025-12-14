@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="stylecop.json" />
+  </Folder>
+  <Project Path="Backport.System.Threading.Lock.Benchmarks/Backport.System.Threading.Lock.Benchmarks.csproj" />
+  <Project Path="Backport.System.Threading.Lock.SourceGenerator.Tests/Backport.System.Threading.Lock.SourceGenerator.Tests.csproj" />
+  <Project Path="Backport.System.Threading.Lock.SourceGenerator.ThreadAbortableTests/Backport.System.Threading.Lock.SourceGenerator.ThreadAbortableTests.csproj" />
+  <Project Path="Backport.System.Threading.Lock.SourceGenerator/Backport.System.Threading.Lock.SourceGenerator.csproj" />
+  <Project Path="Backport.System.Threading.Lock.Tests/Backport.System.Threading.Lock.Tests.csproj" />
+  <Project Path="Backport.System.Threading.Lock.ThreadAbortableTests/Backport.System.Threading.Lock.ThreadAbortableTests.csproj" />
+  <Project Path="Backport.System.Threading.Lock/Backport.System.Threading.Lock.csproj" />
+</Solution>
