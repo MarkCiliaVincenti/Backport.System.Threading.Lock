@@ -16,7 +16,7 @@ public class LockTests
     [Fact]
     public void NormalLock()
     {
-        Lock myLock = LockFactory.Create();
+        var myLock = LockFactory.Create();
         myLock.IsHeldByCurrentThread.Should().BeFalse();
         lock (myLock)
         {
@@ -36,7 +36,7 @@ public class LockTests
     [Obsolete("This method is a best-effort at hardening against thread aborts, but can theoretically retain lock on pre-.NET 5.0. Use with caution.")]
     public void Scope()
     {
-        Lock myLock = LockFactory.Create();
+        var myLock = LockFactory.Create();
         myLock.IsHeldByCurrentThread.Should().BeFalse();
         using (myLock.EnterScope())
         {
@@ -55,7 +55,7 @@ public class LockTests
     [Fact]
     public void TryEnter()
     {
-        Lock myLock = LockFactory.Create();
+        var myLock = LockFactory.Create();
         myLock.IsHeldByCurrentThread.Should().BeFalse();
         myLock.TryEnter().Should().BeTrue();
         myLock.IsHeldByCurrentThread.Should().BeTrue();
@@ -78,7 +78,7 @@ public class LockTests
     [Obsolete("This method is a best-effort at hardening against thread aborts, but can theoretically retain lock on pre-.NET 5.0. Use with caution.")]
     public void ReentrancyTestEnterScope()
     {
-        Lock myLock = LockFactory.Create();
+        var myLock = LockFactory.Create();
         using (myLock.EnterScope())
         {
             myLock.IsHeldByCurrentThread.Should().BeTrue();
@@ -95,7 +95,7 @@ public class LockTests
     [Fact]
     public void ReentrancyTestLock()
     {
-        Lock myLock = LockFactory.Create();
+        var myLock = LockFactory.Create();
         lock (myLock)
         {
             myLock.IsHeldByCurrentThread.Should().BeTrue();
