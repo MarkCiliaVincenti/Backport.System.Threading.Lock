@@ -3,7 +3,7 @@
     <MaxCpuCount>0</MaxCpuCount>
     <DataCollectionRunSettings>
         <DataCollectors>
-            <DataCollector friendlyName="XPlat code coverage">
+            <DataCollector friendlyName="XPlat Code Coverage">
                 <Configuration>
                     <Format>cobertura</Format>
                     <Include>[Backport.System.Threading.Lock*]*</Include>
